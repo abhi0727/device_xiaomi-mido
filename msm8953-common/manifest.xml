@@ -18,7 +18,6 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <hal format="hidl">
         <name>com.fingerprints.extension</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
