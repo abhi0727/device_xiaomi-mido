@@ -25,7 +25,7 @@ LOCAL_SHARED_LIBRARIES := \
     libhwbinder \
     libkeystore_aidl \
     libkeystore_binder \
-    android.hardware.biometrics.fingerprint@2.1 \
+    android.hardware.biometrics.fingerprint@2.0 \
 
 include $(BUILD_EXECUTABLE)
 

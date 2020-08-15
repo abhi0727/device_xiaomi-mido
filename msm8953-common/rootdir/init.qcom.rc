@@ -216,6 +216,12 @@ on post-fs-data
     # Create directory used for dump collection
     mkdir /data/vendor/ssrdump 0770 root system
 
+#Create directories for Fingerprint
+    mkdir /data/vendor/misc/qti_fp 0770 system system
+    mkdir /data/vendor/misc/qti_fp/bg_estimation 0770 system system
+    mkdir /data/vendor/misc/qti_fp/calib_test 0770 system system
+    mkdir /data/vendor/misc/qti_fp/database 0770 system system
+
     # Create directory used by display clients
     mkdir /data/vendor/display 0770 system graphics
 
@@ -668,3 +674,18 @@ service vendor.audio-hal-2-0 /vendor/bin/hw/android.hardware.audio@2.0-service
     oneshot
     interface android.hardware.audio@4.0::IDevicesFactory default
     interface android.hardware.audio@2.0::IDevicesFactory default
+
+on property:sys.fp.vendor=switchf
+    stop gx_fpd
+    setprop sys.fp.vendor searchf
+    setprop fpc.fp.miui.token 0
+    setprop ro.boot.fpsensor fpc
+    setprop ro.hardware.fingerprint searchf
+    start fps_hal
+
+on property:sys.fp.onstart=1
+   setprop goodix.fp.miui.analyse 1
+   setprop goodix.fp.miui.token 0
+   setprop ro.boot.fpsensor gdx
+   setprop ro.hardware.fingerprint goodix
+   start fps_hal
